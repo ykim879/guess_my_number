@@ -1,8 +1,11 @@
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
     private int userRange;
+    private int minValue;
+    private int maxValue;
 
     public Game() {
         Scanner scanner = new Scanner(System.in);
@@ -18,5 +21,11 @@ public class Game {
                 System.out.println("The input has to be the integer N((1 ≤ N ≤ 10E9). Type again: ");
             }
         }
+        maxValue = userRange;
+        minValue = 1;
+    }
+    private int guessNumber() {
+        Random random = new Random();
+        return random.nextInt(maxValue -1) + minValue;
     }
 }
