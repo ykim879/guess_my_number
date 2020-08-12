@@ -28,4 +28,26 @@ public class Game {
         Random random = new Random();
         return random.nextInt(maxValue -1) + minValue;
     }
+    private void response(int guess) {
+        Scanner scanner = new Scanner(System.in);
+        int response;
+        while (true) {
+            try {
+                System.out.print("input -1 when it's bigger than your number, 1 when it's smaller, or 0 when it's correct: ");
+                response = scanner.nextInt();
+                if (userRange != -1 || userRange != 0 || userRange != 1) {
+                    throw new InputMismatchException("Out of range");
+                }
+                break;
+            }catch (InputMismatchException e) {
+                System.out.println("The input must be 1, 0, or -1.");
+            }
+        }
+        if (response == 1) {
+            minValue = guess;
+        } else if(response == -1) {
+            maxValue = guess;
+        }
+
+    }
 }
