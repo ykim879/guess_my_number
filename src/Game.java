@@ -7,6 +7,7 @@ public class Game {
     private int minValue;
     private int maxValue;
     private boolean gotAnswer;
+    private final int Max_Trial = 50;
 
     public Game() {
         Scanner scanner = new Scanner(System.in);
@@ -24,10 +25,13 @@ public class Game {
         }
         maxValue = userRange;
         minValue = 1;
+        gotAnswer = false;
     }
     private int guessNumber() {
         Random random = new Random();
-        return random.nextInt(maxValue -1) + minValue;
+        int guess = random.nextInt(maxValue -1) + minValue;
+        System.out.println("? " + guess);
+        return guess;
     }
     private void response(int guess) {
         Scanner scanner = new Scanner(System.in);
@@ -36,7 +40,7 @@ public class Game {
             try {
                 System.out.print("input -1 when it's bigger than your number, 1 when it's smaller, or 0 when it's correct: ");
                 response = scanner.nextInt();
-                if (userRange != -1 || userRange != 0 || userRange != 1) {
+                if (userRange != -1 && userRange != 0 && userRange != 1) {
                     throw new InputMismatchException("Out of range");
                 }
                 break;
@@ -56,5 +60,16 @@ public class Game {
     private void guessRightNumber(int answer) {
         System.out.print("= " + answer);
         gotAnswer = true;
+    }
+    public void startGame() {
+        int trial = 0;
+        while (trial < Max_Trial && !gotAnswer) {
+            int guess = guessNumber();
+            response(guess);
+            trial++;
+        }
+        if(!gotAnswer) {
+            System.out.println("The Program is unable to guess your number! You win!");
+        }
     }
 }
