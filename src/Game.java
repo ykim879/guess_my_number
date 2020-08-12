@@ -6,6 +6,7 @@ public class Game {
     private int userRange;
     private int minValue;
     private int maxValue;
+    private boolean gotAnswer;
 
     public Game() {
         Scanner scanner = new Scanner(System.in);
@@ -47,7 +48,13 @@ public class Game {
             minValue = guess;
         } else if(response == -1) {
             maxValue = guess;
+        } else {
+            guessRightNumber(guess);
         }
 
+    }
+    private void guessRightNumber(int answer) {
+        System.out.print("= " + answer);
+        gotAnswer = true;
     }
 }
